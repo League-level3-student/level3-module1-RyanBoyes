@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class _02_GuestBook implements ActionListener {
@@ -40,6 +41,7 @@ frame.add(panel);
 panel.add(addButton);
 panel.add(viewButton);
 frame.setSize(400, 600);
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 names = new ArrayList<String>();
 
@@ -57,7 +59,10 @@ public static void main(String[] args) {
 @Override
 public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
-	
+	if(e.getSource()==addButton) {
+		String namesAdded = JOptionPane.showInputDialog("Add names to the guest list");
+		names.add(namesAdded);
+	}
 }
 
 
