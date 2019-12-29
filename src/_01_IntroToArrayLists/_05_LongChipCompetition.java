@@ -28,6 +28,19 @@ public class _05_LongChipCompetition {
 		theBeatles.add(john);
 		theBeatles.add(paul);
 		theBeatles.add(ringo);
+		
+		for (int i = 0; i < theBeatles.size(); i++) {
+			ArrayList<Chip> Chip = theBeatles.get(i).getChips();
+			double chipLength = Chip.get(i).getLength();
+			
+			
+			
+		}
+		
+		
+		
+		
+		
 	}
 	
 	public ArrayList<Beatle> getTheBand(){

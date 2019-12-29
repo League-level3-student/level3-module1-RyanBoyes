@@ -63,6 +63,9 @@ public void actionPerformed(ActionEvent e) {
 		String namesAdded = JOptionPane.showInputDialog("Add names to the guest list");
 		names.add(namesAdded);
 	}
+	else if(e.getSource()==viewButton) {
+		System.out.println(names);
+	}
 }
 
 
