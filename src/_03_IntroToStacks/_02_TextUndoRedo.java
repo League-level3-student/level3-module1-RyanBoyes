@@ -30,7 +30,9 @@ public class _02_TextUndoRedo implements KeyListener{
 	JPanel panel;
 	JLabel label;
 	char charTypeC;
-	Stack<String> charStack;
+	Stack<Character> charStack;
+	String labelText;
+	
 	
 	public _02_TextUndoRedo() {
 		// TODO Auto-generated constructor stub
@@ -42,15 +44,17 @@ public class _02_TextUndoRedo implements KeyListener{
 		panel.add(label);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		label.addKeyListener(this);
+		frame.addKeyListener(this);
+		labelText = new String();
+		
 		
 		frame.setSize(300, 100);
 		
-		charStack = new Stack<String>();
+		charStack = new Stack<Character>();
 		
-		String sType = charTypeC + "";
-
-		label.setText(sType);
+		
+		
+		
 		
 		
 		
@@ -78,7 +82,6 @@ public class _02_TextUndoRedo implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-		
 	
 		
 		
@@ -89,8 +92,30 @@ public class _02_TextUndoRedo implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+	
 		
-		label.setText(e.getKeyChar()+"");
+		if(e.getKeyCode()==KeyEvent.VK_BACK_SPACE) {
+			 String text = label.getText();
+			charStack.push(text.charAt(text.length()-1));
+			text = text.substring(0,text.length()-1);
+			label.setText(text);
+			
+		}
+		else if(e.getKeyCode()==KeyEvent.VK_MINUS){
+			
+			label.setText(label.getText()+charStack.pop());
+		}
+		
+		
+		else {
+			charTypeC = e.getKeyChar();
+
+			label.setText(label.getText()+ charTypeC);
+		}
+		
+		
+		
+		
 		
 	}
 
