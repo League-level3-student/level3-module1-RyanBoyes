@@ -23,6 +23,7 @@ public class HangMan implements KeyListener{
 	char charTyped;
 	int wordLength;
 	String poppedWord;
+	int lives;
 	
 	
 	HangMan(){
@@ -37,6 +38,7 @@ public class HangMan implements KeyListener{
 		frame.addKeyListener(this);
 		frame.setSize(500, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		lives = 6;
 		
 		
 		
@@ -47,7 +49,7 @@ public class HangMan implements KeyListener{
 		for (int i = 0; i < NumOfWords; i++) {
 			String dictWord = readRandomLineFromFile("dictionary.txt");
 			words.push(dictWord);
-			System.out.println(dictWord);
+			
 			
 			
 		}
@@ -169,9 +171,17 @@ public class HangMan implements KeyListener{
 		boolean correct = false;
 		
 		charTyped = e.getKeyChar();
+		
+		
+	
+			
+		
+		
 		for (int i = 0; i < wordLength; i++) {
+			
+			
 		if (poppedWord.charAt(i)==charTyped) {
-			System.out.println("WORK");
+			
 			correct = true;
 			if (i==0) {
 				label.setText(charTyped+label.getText().substring(1));
@@ -180,16 +190,63 @@ public class HangMan implements KeyListener{
 				label.setText(label.getText().substring(0,i)+charTyped);
 			}
 			else {
-				label.setText(label.getText().substring(0,i)+charTyped+label.getText().substring(i));
+				label.setText(label.getText().substring(0,i)+charTyped+label.getText().substring(i+1));
 			}
 		}	
+			
 		
 		
 		
 		}
-		if (!correct) {
-			System.out.println("LOOSE LIFE");
+		
+		if (!correct&&lives>0) {
+			System.out.println("Lives remaining: " + lives--);
 		}
+		else if(!correct&&lives<=0) {
+			label.setText(poppedWord);
+			int ConfirmAnswer = JOptionPane.showConfirmDialog(null, "GAME OVER: Would you like to play again?");
+			if(ConfirmAnswer==0) {
+				
+				lives = 6;
+				String NumOfWordsS = JOptionPane.showInputDialog("How many words would you like to play with?");
+				int NumOfWords = Integer.parseInt(NumOfWordsS);
+				
+				for (int i = 0; i < NumOfWords; i++) {
+					String dictWord = readRandomLineFromFile("dictionary.txt");
+					words.push(dictWord);
+					
+					
+					
+				}
+				
+				label.setText("");
+				poppedWord = words.pop();
+				wordLength = poppedWord.length();
+				for (int i = 0; i < wordLength; i++) {
+					label.setText(label.getText()+"_");
+				}
+				
+				
+			}
+			else if(ConfirmAnswer==1) {
+				System.exit(0);
+			}
+		}
+		
+	if(poppedWord.equals(label.getText())){
+		label.setText("");
+		poppedWord = words.pop();
+		wordLength = poppedWord.length();
+		for (int i = 0; i < wordLength; i++) {
+			label.setText(label.getText()+"_");
+		}
+		
+	}
+		
+	
+	
+	
+	
 	
 	
 	
