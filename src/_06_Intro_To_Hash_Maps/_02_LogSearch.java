@@ -1,9 +1,18 @@
 package _06_Intro_To_Hash_Maps;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
 
-public class _02_LogSearch {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class _02_LogSearch implements ActionListener{
   /* 
 	 * Crate a HashMap of Integers for the keys and Strings for the values.
+	 
 	 * Create a GUI with three buttons. 
 	 * Button 1: Add Entry
 	 * 				When this button is clicked, use an input dialog to ask the user to enter an ID number.
@@ -30,4 +39,109 @@ public class _02_LogSearch {
 	 *
 	 * */
 	
+	
+	
+	HashMap<Integer, String> hash = new HashMap<Integer, String>();
+	JFrame frame;
+	JPanel panel;
+	JButton Add;
+	JButton Search;
+	JButton View;
+	
+	_02_LogSearch(){
+		frame = new JFrame();
+		panel = new JPanel();
+		Add = new JButton("Add Entry");
+		Search = new JButton("Search By ID");
+		View = new JButton("View List");
+		
+		frame.add(panel);
+		panel.add(Add);
+		panel.add(Search);
+		panel.add(View);
+		frame.pack();
+		frame.setVisible(true);
+		Add.addActionListener(this);
+		Search.addActionListener(this);
+		View.addActionListener(this);
+	}
+
+	
+	
+	public static void main(String[] args) {
+	
+	new _02_LogSearch();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==Add) {
+			String enteredIDS = JOptionPane.showInputDialog("Please enter an ID Number");
+			int enteredID = Integer.parseInt(enteredIDS);
+			String enteredName = JOptionPane.showInputDialog("Please enter a name");
+			hash.put(enteredID, enteredName);
+		}
+		
+		if(e.getSource()==Search) {
+			String enteredSearchS = JOptionPane.showInputDialog("Enter and ID Number");
+			int enteredSearch = Integer.parseInt(enteredSearchS);
+			System.out.println(hash.get(enteredSearch));
+		}
+	
+	
+		if(e.getSource()==View) {
+			for(Integer i : hash.keySet()) {
+				System.out.println("ID: " + i + " Name: " + hash.get(i));
+			}
+		}
+	
+	
+	
+	
+	
+	
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+
